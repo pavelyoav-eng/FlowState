@@ -6,9 +6,9 @@
  
 ## What It Does
  
-FlowState acts as a **project onboarding layer** for Claude. When you describe what you're about to work on, it scans your intent and surfaces the skills most relevant to your project — so you're not discovering mid-task that a skill exists that would have saved you time.
+FlowState acts as a **project onboarding layer** for Claude. When you describe what you're about to work on, it scans your intent and surfaces the skills most relevant to your project - so you're not discovering mid-task that a skill exists that would have saved you time.
  
-It analyzes your prompt, maps it to the available skill library, and returns a ranked list of what you'll likely need — with a one-line explanation of when each skill will come into play.
+It analyzes your prompt, maps it to the available skill library, and returns a ranked list of what you'll likely need - with a one-line explanation of when each skill will come into play.
  
 ---
  
@@ -16,11 +16,11 @@ It analyzes your prompt, maps it to the available skill library, and returns a r
  
 FlowState activates when:
  
-- You open with a **project description** — *"I'm building...", "I want to create...", "Help me set up..."*
+- You open with a **project description** - *"I'm building...", "I want to create...", "Help me set up..."*
 - You describe a **multi-step workflow** that spans multiple file types or tools
-- You explicitly ask — *"what skills do I need for X?"*
+- You explicitly ask - *"what skills do I need for X?"*
 - You upload files at the start of a session, signaling a file-heavy workflow
-It stays silent when your request is simple or single-step — it's not meant to interrupt, only to help you plan.
+It stays silent when your request is simple or single-step - it's not meant to interrupt, only to help you plan.
  
 ---
  
@@ -59,11 +59,11 @@ flowstate/
  
 ## How It Works
  
-1. **Parses intent** — reads the user's opening prompt for signals: file types mentioned, tools implied, workflow steps described
-2. **Cross-references the skill index** — matches signals against `references/skill-index.md`
-3. **Ranks by relevance** — skills that map directly to the task come first; adjacent/optional ones are flagged as secondary
-4. **Explains briefly** — each suggestion includes a one-line reason so the user understands *why* it's being recommended
-5. **Moves on** — doesn't block the conversation; the user can accept, ignore, or ask for more detail
+1. **Parses intent** - reads the user's opening prompt for signals: file types mentioned, tools implied, workflow steps described
+2. **Cross-references the skill index** - matches signals against `references/skill-index.md`
+3. **Ranks by relevance** - skills that map directly to the task come first; adjacent/optional ones are flagged as secondary
+4. **Explains briefly** - each suggestion includes a one-line reason so the user understands *why* it's being recommended
+5. **Moves on** - doesn't block the conversation; the user can accept, ignore, or ask for more detail
 ---
  
 ## Extending FlowState
@@ -93,8 +93,8 @@ To add a new skill to the suggestion pool, add an entry to `references/skill-ind
  
 ## Status
  
-- [ ] `SKILL.md` — core skill logic
-- [ ] `references/skill-index.md` — skill catalog
+- [ ] `SKILL.md` - core skill logic
+- [ ] `references/skill-index.md` - skill catalog
 - [ ] Trigger optimization
 - [ ] Eval set
 ---
