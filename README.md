@@ -1,4 +1,4 @@
-# 🌊 FlowState
+#  FlowState
  
 > A Claude skill that reads what you're building and lines up the right skills before you start.
  
