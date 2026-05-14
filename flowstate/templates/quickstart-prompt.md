@@ -1,6 +1,6 @@
 # Quickstart prompt template
 
-Copy, fill the bracketed sections, and paste as the **first message** in a new session (or after a pivot).
+Copy, fill the bracketed sections, and paste as the **first message** in a new session (or after a pivot). FlowState activates automatically when this is your opener — no need to invoke it explicitly.
 
 ```markdown
 ## What I'm doing
@@ -16,10 +16,6 @@ Copy, fill the bracketed sections, and paste as the **first message** in a new s
 ## Constraints
 
 - [deadline, performance, compliance, no network, etc.]
-
-## Ask FlowState
-
-Recommend which skills I should lean on for this work, in order, with one line each on why. Use compact / standard: [pick one].
 ```
 
 Optional **minimal** variant:
