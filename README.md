@@ -1,12 +1,12 @@
 #  FlowState
  
-> A Claude skill that reads what you're building and lines up the right skills before you start.
+> An agent skill that reads what you're building and lines up the right skills before you start (works with Claude Code, Cursor, and similar setups that load `SKILL.md`).
  
 ---
  
 ## What It Does
  
-FlowState acts as a **project onboarding layer** for Claude. When you describe what you're about to work on, it scans your intent and surfaces the skills most relevant to your project - so you're not discovering mid-task that a skill exists that would have saved you time.
+FlowState acts as a **project onboarding layer** for the agent. When you describe what you're about to work on, it scans your intent and surfaces the skills most relevant to your project — so you're not discovering mid-task that a capability you care about was never surfaced.
  
 It analyzes your prompt, maps it to the available skill library, and returns a ranked list of what you'll likely need - with a one-line explanation of when each skill will come into play.
  
@@ -57,9 +57,9 @@ FlowState/                    # repository root (README + LICENSE live here)
     │   ├── verbosity.md      # Compact vs standard response rules
     │   └── confidence-thresholds.md
     ├── references/
-    │   ├── skill-index.md    # Skill catalog, keywords, metadata
-    │   ├── skill-chains.md   # Sequencing / bundles
-    │   └── anti-skill-rules.md
+    │   ├── skill-index.md    # Domain-organized catalog (keywords + chains per skill)
+    │   ├── skill-chains.md   # Cross-cutting sequences and bundles (ids match the index)
+    │   └── anti-skill-rules.md  # When to omit or deprioritize skills (ids match the index)
     ├── templates/
     │   └── quickstart-prompt.md
     └── evals/
@@ -71,23 +71,29 @@ FlowState/                    # repository root (README + LICENSE live here)
  
 ## How It Works
  
-1. **Parses intent** - reads the user's opening prompt for signals: file types mentioned, tools implied, workflow steps described
-2. **Cross-references the skill index** - matches signals against `references/skill-index.md`
-3. **Ranks by relevance** - skills that map directly to the task come first; adjacent/optional ones are flagged as secondary
-4. **Explains briefly** - each suggestion includes a one-line reason so the user understands *why* it's being recommended
-5. **Moves on** - doesn't block the conversation; the user can accept, ignore, or ask for more detail
+1. **Parses intent** — reads the opening prompt (and pivots) for signals: file types, tools, workflow steps, constraints.
+2. **Cross-references the skill index** — matches signals against `flowstate/references/skill-index.md` (only recommend skill ids that appear there as `##` headings).
+3. **Applies anti-rules and chains** — filters with `anti-skill-rules.md`, orders with `skill-chains.md`, and uses per-skill `Chains to` from the index where helpful.
+4. **Uses config** — response shape from `config/verbosity.md`; confidence labels from `config/confidence-thresholds.md`.
+5. **Ranks by relevance** — direct matches first; secondaries when a follow-on step is likely.
+6. **Explains briefly** — each line ties the skill to something the user said.
+7. **Moves on** — non-blocking; user can ignore or go deeper. See `flowstate/SKILL.md` for optional steps (e.g. surfacing missing skills) if your runtime supports them.
+ 
 ---
  
 ## Extending FlowState
  
-To add a new skill to the suggestion pool, add an entry to `flowstate/references/skill-index.md`:
+To add a skill to the suggestion pool, append a section to `flowstate/references/skill-index.md` under the right domain heading. Use the same shape as existing entries — and **only** use other skill ids in `Chains to` that already exist as `##` headings in that file (keeps the index, chains, and anti-rules consistent).
  
 ```md
 ## skill-name
-- **What it does:** One sentence description
-- **Suggests when:** Keywords or contexts that should trigger this as a recommendation
-- **Priority:** primary | secondary
+- **What it does:** One sentence.
+- **Keywords:** comma, separated, triggers
+- **Chains to:** other-skill-id, another-skill-id
+- **Priority hint:** primary | secondary (when to rank it first vs as a follow-on)
 ```
+ 
+If you add exclusion or ordering logic, update `anti-skill-rules.md` and `skill-chains.md` so they reference the same ids.
  
 ---
  
@@ -99,17 +105,20 @@ To add a new skill to the suggestion pool, add an entry to `flowstate/references
 | **Ranked, not exhaustive** | Only surfaces skills that are genuinely relevant to the task |
 | **Explainable** | Every suggestion includes a reason |
 | **Non-blocking** | If nothing is relevant, FlowState stays quiet |
-| **Forward-looking** | Thinks about what you'll need 3 steps ahead, not just right now |
+| **Forward-looking** | Thinks about what you'll need a few steps ahead, not only the first action |
+| **Same vocabulary** | Index, chains, and anti-rules use the same skill ids — no orphan names |
  
 ---
  
 ## Status
  
 - [x] `flowstate/SKILL.md` — core skill logic and orchestration
-- [x] `flowstate/references/skill-index.md` — skill catalog
+- [x] `flowstate/references/skill-index.md` — domain skill catalog + per-skill chains
+- [x] `flowstate/references/skill-chains.md` — shared sequences and bundles
+- [x] `flowstate/references/anti-skill-rules.md` — exclusions aligned to the catalog
 - [x] `flowstate/config/` — verbosity and confidence bands
 - [x] `flowstate/evals/` — trigger and pivot case sets
 - [ ] Trigger tuning against real sessions
 ---
  
-*Built as a Claude skill. Part of the skills ecosystem.*
+*Built as an agent skill. Extend the catalog in-repo; wire installed skills in your own skills directory.*
