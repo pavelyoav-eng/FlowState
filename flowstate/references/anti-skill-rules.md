@@ -1,6 +1,6 @@
 # Anti-skill rules
 
-Explicit **do not suggest** and **deprioritize** rules. Every skill named below must exist as a `##` heading in `references/skill-index.md`. If a rule matches, drop the skill or move it below *maybe* unless the user asked for it by name.
+Explicit **do not suggest** and **deprioritize** rules. Every skill named below must exist as a `##` heading in `references/skill-index.md`. If a rule matches, drop the skill or move it below unless the user asked for it by name.
 
 ## Hard exclusions (do not suggest)
 
