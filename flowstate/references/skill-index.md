@@ -55,7 +55,7 @@ Fields:
 ## frontend-design
 - **What it does:** Creates distinctive, production-grade web UIs with high design quality.
 - **Keywords:** react, component, UI, interface, html, css, tailwind, landing page, dashboard, web app, layout, responsive, design system, figma to code
-- **Chains to:** api-integration, testing
+- **Chains to:** api-integration, unit-testing
 - **Priority hint:** primary when a visual interface is being built
 
 ## react-component
@@ -89,25 +89,25 @@ Fields:
 ## api-design
 - **What it does:** Designs and documents RESTful or GraphQL APIs with clear contracts.
 - **Keywords:** api, rest, restful, graphql, endpoint, routes, swagger, openapi, postman, api docs
-- **Chains to:** api-integration, auth, testing
+- **Chains to:** api-integration, auth, unit-testing
 - **Priority hint:** primary when building or designing an API layer
 
 ## api-integration
 - **What it does:** Integrates and consumes third-party or internal APIs in application code.
 - **Keywords:** fetch, axios, http client, webhook, third-party api, sdk, api key, integration
-- **Chains to:** error-handling, testing
+- **Chains to:** error-handling, unit-testing
 - **Priority hint:** primary when connecting to an external service
 
 ## auth
 - **What it does:** Implements authentication and authorization flows in applications.
 - **Keywords:** auth, login, jwt, oauth, oauth2, sso, session, cookies, rbac, permissions, keycloak, passport
-- **Chains to:** security, testing
+- **Chains to:** security-audit, unit-testing
 - **Priority hint:** primary when login, access control, or tokens are mentioned
 
 ## server-setup
 - **What it does:** Scaffolds and configures a backend server with routing and middleware.
 - **Keywords:** express, fastapi, django, flask, node, server, middleware, routing, cors, body parser
-- **Chains to:** api-design, database
+- **Chains to:** api-design, database-design
 - **Priority hint:** primary at greenfield backend project start
 
 ## microservices
@@ -125,19 +125,19 @@ Fields:
 ## caching
 - **What it does:** Adds caching layers to reduce latency and database load.
 - **Keywords:** redis, memcached, cache, ttl, cache invalidation, in-memory, session cache, cdn
-- **Chains to:** database, monitoring
+- **Chains to:** database-queries, monitoring
 - **Priority hint:** secondary unless performance or scale is explicitly mentioned
 
 ## background-jobs
 - **What it does:** Sets up queues, workers, and scheduled jobs for async processing.
 - **Keywords:** queue, worker, cron, background job, bull, celery, scheduled task, async processing
-- **Chains to:** monitoring, database
+- **Chains to:** monitoring, database-queries
 - **Priority hint:** primary when async or scheduled work is described
 
 ## error-handling
 - **What it does:** Implements structured error handling, logging, and recovery patterns.
 - **Keywords:** error handling, try catch, exceptions, fallback, retry, circuit breaker, status codes
-- **Chains to:** monitoring, testing
+- **Chains to:** monitoring, unit-testing
 - **Priority hint:** secondary; primary when reliability or error flows are the focus
 
 ---
@@ -209,7 +209,7 @@ Fields:
 ## cloud-infra
 - **What it does:** Configures and manages cloud resources on AWS, GCP, or Azure.
 - **Keywords:** aws, gcp, azure, cloud, ec2, s3, lambda, cloud functions, storage bucket, iam, vpc
-- **Chains to:** monitoring, security
+- **Chains to:** monitoring, security-audit
 - **Priority hint:** primary when cloud resources or providers are mentioned
 
 ## serverless
@@ -533,6 +533,6 @@ Fields:
 
 - **What it does:** …
 - **Keywords:** …
-- **Chains to:** skill-a, skill-b
+- **Chains to:** docx, pdf
 - **Priority hint:** primary | secondary
 ```

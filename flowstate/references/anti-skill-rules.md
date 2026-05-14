@@ -1,33 +1,38 @@
 # Anti-skill rules
 
-Explicit **do not suggest** and **deprioritize** rules. If a rule matches, drop the skill or move it below *maybe* unless the user directly asked for that skill by name.
+Explicit **do not suggest** and **deprioritize** rules. Every skill named below must exist as a `##` heading in `references/skill-index.md`. If a rule matches, drop the skill or move it below *maybe* unless the user asked for it by name.
 
 ## Hard exclusions (do not suggest)
 
 | Context signal | Do not suggest |
 |----------------|----------------|
-| User wants a **single one-line answer** (definition, trivia, math snippet) | babysit, split-to-prs, create-subagent |
-| **No repository** in scope (pure chat / theory) | babysit, split-to-prs |
-| User explicitly said **do not change files** / **advice only** | create-rule, create-hook, create-skill (unless they are authoring for others) |
-| User is **not** using Cursor / no Cursor context mentioned | update-cursor-settings, update-cli-config, statusline, create-rule, create-skill, create-hook, create-subagent |
-| User wants to **run a single terminal command** | all skills except shell (which is not routed by FlowState anyway) |
+| User wants a **single one-line answer** (definition, trivia, math) | kubernetes, microservices, infrastructure-as-code, system-design, compliance, data-pipeline |
+| **No software project** (pure chat, creative writing, non-code life advice) | ci-cd, docker, kubernetes, deployment, database-migration, api-design |
+| **No repository / codebase** in scope (theory only) | git-workflow, pr-management, monorepo, ci-cd, deployment, database-migration |
+| User said **do not change files** / **advice only** | database-migration, deployment, linting-formatting, code-generation |
+| **Homework-style** “explain this concept” with no build | e2e-testing, load-testing, kubernetes, infrastructure-as-code |
 
-## Soft exclusions (deprioritize or one-line only)
+## Soft exclusions (deprioritize or one line only)
 
 | Context signal | Behavior |
 |----------------|----------|
-| Greenfield first commit, no open PRs | babysit, split-to-prs — omit unless work is already large |
-| Skill overlaps **100%** with a higher-ranked skill | Keep the sharper match only |
-| Pivot **reduced** scope (e.g. from "whole system" to "fix one typo") | Remove forward-looking secondaries |
-| User asked for **sdk** help in a non-TypeScript context | Deprioritize sdk; note the language limitation |
+| **Toy / hello-world** scope | kubernetes, microservices, load-testing, compliance, tracing |
+| **Single small bugfix** in one file | system-design, monorepo, data-pipeline, edge-computing |
+| Pivot to **narrower** scope | Strip secondaries (e.g. monitoring, load-testing) unless still relevant |
+| User only needs **static copy** (no app) | server-setup, api-integration, deployment, kubernetes |
 
 ## Confusion pairs
 
-When two skills score close, use these tie-breakers:
+When two skills score close, prefer the tighter match:
 
-- **babysit** vs **split-to-prs**: Prefer `babysit` when an open PR is already failing or has comments. Prefer `split-to-prs` when work is not yet branched or the changeset is too broad to review as-is.
-- **create-rule** vs **create-skill**: Prefer `create-rule` for repo-wide coding standards and persistent context. Prefer `create-skill` for packaged, reusable agent workflows with trigger logic.
-- **create-skill** vs **create-subagent**: Prefer `create-skill` for domain logic and reusable workflows. Prefer `create-subagent` when the user needs a persistent specialized AI persona with its own isolated context.
-- **update-cursor-settings** vs **update-cli-config**: Prefer `update-cursor-settings` for IDE editor behavior (themes, fonts, format-on-save). Prefer `update-cli-config` for CLI runtime behavior (approval mode, sandbox, vim mode). Suggest both only when the user is doing broad Cursor configuration.
+- **docker** vs **kubernetes**: `docker` for container images and compose; `kubernetes` when orchestration, clusters, or helm are explicit.
+- **api-design** vs **api-integration**: `api-design` for contracts and new surface area; `api-integration` for consuming or wiring existing HTTP APIs.
+- **unit-testing** vs **integration-testing** vs **e2e-testing**: unit for isolated modules; integration for cross-layer or service boundaries; e2e for full browser or user flows.
+- **monitoring** vs **logging** vs **error-tracking**: `monitoring` for metrics/dashboards; `logging` for log pipelines; `error-tracking` when Sentry-like tools or crash triage dominate.
+- **database-design** vs **orm-setup**: `database-design` for schema and modeling; `orm-setup` when the ORM layer itself is the task.
+- **pr-management** vs **code-review**: `pr-management` for merge health, CI on the branch, conflicts; `code-review` for review process and feedback quality.
+- **reporting** vs **data-visualization**: `reporting` for document-style outputs (often pdf/xlsx); `data-visualization` for charts and dashboards in-app.
+- **security-audit** vs **dependency-management**: `security-audit` for vuln review and config; `dependency-management` for npm audit, lockfiles, CVE bumps.
+- **create-skill** vs **create-rule**: `create-skill` for packaged SKILL-style workflows; `create-rule` for repo-wide persistent rules and standards.
 
 When in doubt, prefer **fewer** suggestions with **higher** average confidence.

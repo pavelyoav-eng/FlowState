@@ -26,7 +26,7 @@ What skills should I use to split this huge refactor into reviewable PRs?
 **Expected:**
 
 - Activates even if short (explicit ask).
-- Surfaces split-to-prs or equivalent if in index; otherwise closest match (e.g. explore + implement) with honest gap note.
+- Surfaces **pr-management** and/or **git-workflow** (high); optional **monorepo** if the refactor spans packages.
 - Compact or standard per user preference if stated.
 
 ---
@@ -50,8 +50,8 @@ My GitHub Action fails on `npm test` with this log: [paste].
 
 **Expected:**
 
-- **ci-fix** (high); **babysit-pr** only if PR context appears (medium or omit).
-- No long exploration suggestion unless repo is unknown and they ask where tests live.
+- **ci-cd** (high); **pr-management** if an open PR or merge thread is in scope (medium or omit).
+- Optional **unit-testing** when the failure is test-related; no unrelated heavy skills unless logs imply them.
 
 ---
 
@@ -63,4 +63,4 @@ My GitHub Action fails on `npm test` with this log: [paste].
 **Expected:**
 
 - Activates (multi-file + structural task).
-- **explore-codebase** or **implement-feature** ranked appropriately; reasons cite structure/folder cleanup.
+- **react-component**, **frontend-design**, or **monorepo** ranked appropriately; reasons cite structure/folder cleanup.

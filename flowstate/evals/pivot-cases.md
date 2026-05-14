@@ -57,7 +57,7 @@ Ok, now implement refresh rotation in our repo at `backend/auth`.
 
 **Expected:**
 
-- Second turn: activate FlowState-style mapping; suggest explore / implement / tests as appropriate; anti-rule *theory-only* no longer applies.
+- Second turn: activate FlowState-style mapping; suggest **auth**, **api-integration**, **unit-testing** as appropriate; anti-rule *theory-only* no longer applies.
 
 ---
 
