@@ -10,7 +10,7 @@ description: >-
 
 # FlowState
 
-Orchestrate skill discovery: interpret intent, score candidates, respect chains and anti-rules, then output a ranked, explainable list without blocking the main task.
+Orchestrate skill discovery: interpret intent, score candidates, respect chains and anti-rules, then output a ranked, explainable list — and offer to fetch and install any missing skills with user approval.
 
 ## When This Skill Applies
 
@@ -52,6 +52,15 @@ Stay quiet for single-step, fully scoped requests where skill routing adds no va
    - Every listed skill gets a **one-line reason** tied to the user's wording.
    - End with a **non-blocking** question or invitation (e.g. whether to start with the top pick), not a hard gate.
 
+8. **Offer to fetch missing skills:**
+   - After emitting the list, check which recommended skills do **not** already exist locally as SKILL.md files.
+   - For each missing skill, search the web using the query: `"<skill-name>" SKILL.md cursor agent skill`
+   - Present the best match per skill to the user: name, source URL, and a one-line description of what was found.
+   - Ask for approval **once** across all missing skills (not one prompt per skill).
+   - On approval: write each fetched SKILL.md to `/skills/<skill-name>/SKILL.md`. Do not overwrite skills that already exist unless the user explicitly asks.
+   - On rejection: continue without installing; the user can ask later.
+   - If no match is found for a skill after searching, note it honestly: *"Couldn't find a public SKILL.md for `<skill-name>` — you may need to build it."*
+
 ## Mid-session Pivot
 
 If the user changes goal, stack, or deliverable in a way that invalidates earlier assumptions:
@@ -59,6 +68,7 @@ If the user changes goal, stack, or deliverable in a way that invalidates earlie
 - Re-scan signals from the **pivot message**; do not assume earlier skills still apply.
 - Demote or remove skills that **anti-skill-rules** or the new goal rule out.
 - Prefer a **short delta** (what changed in recommendations) unless verbosity is *compact* and the pivot is small.
+- Re-run Step 8 for any newly recommended skills that are not yet installed.
 
 ## Quality Bar
 
@@ -69,6 +79,7 @@ If the user changes goal, stack, or deliverable in a way that invalidates earlie
 | Explainable | Each line ties to a user signal, not generic praise. |
 | Non-blocking | User can ignore suggestions and continue. |
 | Forward-looking | Include one secondary only when it clearly saves a later step. |
+| Honest gaps | If a skill can't be found or installed, say so clearly. |
 
 ## File Map
 
