@@ -48,11 +48,23 @@ Want me to start with any of these?
 ## Project Structure
  
 ```
-flowstate/
-├── README.md               # This file
-├── SKILL.md                # Core skill logic and trigger instructions
-└── references/
-    └── skill-index.md      # Catalog of available skills with keywords and descriptions
+FlowState/                    # repository root (README + LICENSE live here)
+├── README.md                 # This file
+├── LICENSE
+└── flowstate/
+    ├── SKILL.md              # Core trigger logic + orchestration
+    ├── config/
+    │   ├── verbosity.md      # Compact vs standard response rules
+    │   └── confidence-thresholds.md
+    ├── references/
+    │   ├── skill-index.md    # Skill catalog, keywords, metadata
+    │   ├── skill-chains.md   # Sequencing / bundles
+    │   └── anti-skill-rules.md
+    ├── templates/
+    │   └── quickstart-prompt.md
+    └── evals/
+        ├── trigger-cases.md
+        └── pivot-cases.md
 ```
  
 ---
@@ -68,7 +80,7 @@ flowstate/
  
 ## Extending FlowState
  
-To add a new skill to the suggestion pool, add an entry to `references/skill-index.md`:
+To add a new skill to the suggestion pool, add an entry to `flowstate/references/skill-index.md`:
  
 ```md
 ## skill-name
@@ -93,10 +105,11 @@ To add a new skill to the suggestion pool, add an entry to `references/skill-ind
  
 ## Status
  
-- [ ] `SKILL.md` - core skill logic
-- [ ] `references/skill-index.md` - skill catalog
-- [ ] Trigger optimization
-- [ ] Eval set
+- [x] `flowstate/SKILL.md` — core skill logic and orchestration
+- [x] `flowstate/references/skill-index.md` — skill catalog
+- [x] `flowstate/config/` — verbosity and confidence bands
+- [x] `flowstate/evals/` — trigger and pivot case sets
+- [ ] Trigger tuning against real sessions
 ---
  
 *Built as a Claude skill. Part of the skills ecosystem.*
