@@ -82,6 +82,29 @@ FlowState/
 
 ---
 
+## Getting Started
+
+**1. Install** -- drop the `flowstate/` folder into your project.
+
+**2. Load it.** Add to `.cursor/rules` so it loads every session automatically:
+```
+Always read flowstate/SKILL.md at the start of every session.
+```
+Or paste this manually at the start of any session:
+```
+Read flowstate/SKILL.md before we start.
+```
+
+**3. Describe your project.** Talk normally. FlowState activates on its own.
+
+**4. Review the list.** Ranked skills with confidence labels and a one-line reason each.
+
+**5. Approve the fetch.** For missing skills it finds online, it asks once. Yes installs them, no skips them.
+
+**6. Test it occasionally.** Grab a prompt from `evals/trigger-cases.md`, paste it into a fresh session, check the output matches the expected skills. That's your smoke test.
+
+---
+
 ## Extending FlowState
 
 To add a skill to the pool, add a section to `flowstate/references/skill-index.md`:
