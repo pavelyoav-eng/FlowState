@@ -1,0 +1,11 @@
+---
+description: Load FlowState skill and config at every session start
+alwaysApply: true
+---
+
+At the start of this session, read the following files in order:
+1. `flowstate/SKILL.md`
+2. `flowstate/config/verbosity.md`
+3. `flowstate/config/confidence-thresholds.md`
+
+Then follow the operating procedure defined in `flowstate/SKILL.md` for the rest of this session.
